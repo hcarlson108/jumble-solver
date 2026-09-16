@@ -10,8 +10,12 @@ function permute(letters) {
   if (letters.length <= 1) return [letters.join('')];
 
   const results = [];
+  const seen = new Set();
 
   for (let i = 0; i < letters.length; i++) {
+    if (seen.has(letters[i])) continue;
+    seen.add(letters[i]);
+
     const remaining = [...letters.slice(0, i), ...letters.slice(i + 1)];
     for (const perm of permute(remaining)) {
       results.push(letters[i] + perm);
